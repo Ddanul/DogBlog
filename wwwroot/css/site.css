@@ -1,0 +1,102 @@
+/*Write all of your CSS here*/
+
+.header{
+    height: 50px;
+}
+
+.header p{
+    display: inline-block;
+    padding-left: 30px;
+}
+
+.header form{
+    display: inline-block;
+}
+
+.header button{
+    text-decoration: none;
+    padding: none;
+    border:none;
+}
+
+.title h1{
+    padding-top:25px;
+    padding-left: 10px;
+    text-align: center;
+}
+
+.navbar{
+    padding-top: 15px;
+    display: inline-block;
+}
+
+.navbar a{
+    text-decoration: none;
+    color: grey;
+    text-align: center;
+}
+
+.navbar li{
+    display: inline-block;
+    margin: 0 50px 0 0;
+}
+
+.navbar ul{
+    list-style: none outside;
+}
+
+.body h4{
+    text-align: center;
+}
+
+.contact ul{
+    text-align: center;
+}
+
+.contact li{
+    display: inline-block;
+    margin: 0 20px 0 0;
+}
+
+.contact a{
+    text-decoration: none;
+    color: grey;
+    text-align: center;
+}
+
+#alpha{
+    text-align: center;
+    border-right: 1px solid silver;
+}
+
+#beta h4{
+    text-align: left;
+}
+
+.foot{
+    background-color: whitesmoke;
+}
+
+.foot p{
+    font-size: 10px;
+}
+
+.foot a{
+    color:orange;
+}
+
+.park_entry{
+    border: 1px solid silver;
+    border-radius: 10px;
+    text-align: left;
+    padding: 10px 5px 0 10px;
+}
+
+#map-div{
+  height: 375px;
+  width: 750px;
+}
+
+#fb{
+    margin-bottom: -5px;
+}

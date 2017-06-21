@@ -1,0 +1,125 @@
+@{
+    ViewData["Title"] = "DogBlog";
+}
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbj8DhS_Xl9uzeN-KeFXF_8gXo32SZq6k&libraries=places"></script>
+         
+  </head>
+  <body>
+      <div class="header">
+    <div class="u-pull-right">
+        <p>Logged in as @ViewBag.CurrUser.Name</p>
+        <p> | </p>
+        <form action="/logout" method="post">
+            <button type="submit" class="link">Logout</button>
+        </form>
+    </div>
+</div>
+<div class="container">
+
+    <div class="title">
+        <div class="row">
+            <div class="four columns">
+                <h1>Manolo |</h1>
+            </div>
+            <div class="navbar" class="eight columns">
+                <ul>
+                    <li>
+                        <h5><a href="/Dashboard">Home</a></h5>
+                    </li>
+                    <li>
+                        <h5><a href="/Blog", "Blog">Blog</a></h5>
+                    </li>
+                    <li>
+                        <h5><a href="">Photos</a></h5>
+                    </li>
+                    <li>
+                        <h5><a href="/Parks">Parks Visited</a></h5>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="map-div"></div>
+    <div class="park_info"> 
+        <h5>Name: @ViewBag.thisPark.Name</h5>
+        <h5>Address:</h5><h6>@ViewBag.thisPark.Address</h6>
+        <h5>Reviews:</h5>
+        @{
+            foreach(var review in @ViewBag.thisPark.Reviews){
+                <p><span style="font-weight: bold">@review.User.Name</span> commented @review.TimeAgo(@review.CreatedAt):</p>
+                <p>"@review.Text"</p>
+            }
+            <div class="review">
+                <form action="/AddReview" method="post">
+                    <input type="hidden" name="ParkId" value=@ViewBag.thisPark.ParkId>
+                    <input type="hidden" name="UserId" value=@ViewBag.CurrUser.UserId>
+                    <input type="text" name="Text">
+                    <button type="submit">Add Review</button>
+                </form>
+            </div>
+        }
+    </div>
+       <script>
+       $(document).ready(function() {
+            var geocoder;
+            var map;
+            var address ="@ViewBag.thisPark.Address";
+            function initialize() {
+                geocoder = new google.maps.Geocoder();
+                var latlng = new google.maps.LatLng(47.6062, -122.3321);
+                var myOptions = {
+                zoom: 10,
+                center: latlng,
+                mapTypeControl: true,
+                mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+                navigationControl: true,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById("map-div"), myOptions);
+                if (geocoder) {
+                    geocoder.geocode( { 'address': address}, function(results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                        if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+                        console.log("RESULTS", results[0].geometry.location);
+                        var lat = results[0].geometry.location.lat;
+                        var lon = results[0].geometry.location.lng;    
+                        map.setCenter(results[0].geometry.location);
+
+                            var infowindow = new google.maps.InfoWindow(
+                                { content: '<b>'+address+'</b>',
+                                size: new google.maps.Size(150,50)
+                                });
+
+                            var marker = new google.maps.Marker({
+                                position: results[0].geometry.location,
+                                map: map, 
+                                title:address
+                            }); 
+                            google.maps.event.addListener(marker, 'click', function() {
+                                infowindow.open(map,marker);
+                            });
+
+                        } else {
+                            alert("No results found");
+                        }
+                        } else {
+                        alert("Geocode was not successful for the following reason: " + status);
+                        }
+                    });
+                };
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+       });
+        </script>
+<div id="Results">
+        <p id="temp_res"></p>
+    </div>
+</div>  
+  </body>
+</html>

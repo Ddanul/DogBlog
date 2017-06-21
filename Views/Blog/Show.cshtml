@@ -1,0 +1,67 @@
+@{
+    ViewData["Title"] = "DogBlog";
+}
+API key = AIzaSyB966cyRNez_buc5wgQwRLW7sNXMkMMsZA
+<div class="header">
+    <div class="u-pull-right">
+        <p>Logged in as @ViewBag.CurrUser.Name</p>
+        <p> | </p>
+        <form action="/logout" method="post">
+            <button type="submit" class="link">Logout</button>
+        </form>
+    </div>
+</div>
+<div class="container">
+
+    <div class="title">
+        <div class="row">
+            <div class="four columns">
+                <h1>Manolo |</h1>
+            </div>
+            <div class="navbar" class="eight columns">
+                <ul>
+                    <li>
+                        <h5><a href="/Dashboard">Home</a></h5>
+                    </li>
+                    <li>
+                        <h5><a href="/Blog", "Blog">Blog</a></h5>
+                    </li>
+                    <li>
+                        <h5><a href="">Photos</a></h5>
+                    </li>
+                    <li>
+                        <h5><a href="/Parks">Parks Visited</a></h5>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="offset-by-three nine columns" id="beta">
+                <h4>@ViewBag.thisBlog.Title</h4>
+                <p>@ViewBag.thisBlog.Content</p>
+                <div class="foot">
+                    <p>posted by <a href="#">Manolo</a> on @ViewBag.thisBlog.UpdatedAt</p>
+                </div>
+                
+                @{
+                    foreach(var comment in @ViewBag.thisBlog.Comments){
+
+                            <p>@comment.User.Name commented: @comment.Text on @comment.CreatedAt</p>
+                        }
+                        
+                        <form action="/AddComment" method="post">
+                            <div class="form-group row">
+                                <label for="comment" class="col-2 col-form-label">Comment:</label>
+                                <div class="col-10">
+                                    <input type="text" class"form-control" id="comment" name="Text">
+                                </div>
+                            </div>
+                            <input type="hidden" name="BlogId" value=@ViewBag.thisBlog.BlogId>
+                            <input type="hidden" name="UserId" value=@ViewBag.CurrUser.UserId>
+                            <div>
+                                <button type="submit" class="btn btn-info">Submit</button>
+                            </div>
+                        </form>
+                }
+            </div>
+</div>

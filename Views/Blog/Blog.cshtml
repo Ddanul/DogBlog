@@ -1,0 +1,96 @@
+@{
+    ViewData["Title"] = "DogBlog";
+}
+
+<div class="header">
+    <div class="u-pull-right">
+        @{
+            if(@ViewBag.CurrUser.Name == "Manolo"){
+                <a href="/addBlog">Create New Blog Post</a>
+            }
+        }
+        <p>Logged in as @ViewBag.CurrUser.Name</p>
+        <p> | </p>
+        <form action="/logout" method="post">
+            <button type="submit" class="link">Logout</button>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="title">
+        <div class="row">
+            <div class="four columns">
+                <h1>Manolo |</h1>
+            </div>
+            <div class="navbar" class="eight columns">
+                <ul>
+                    <li>
+                        <h5><a href="/Dashboard">Home</a></h5>
+                    </li>
+                    <li>
+                        <h5><span color="black">Blog</span></h5>
+                    </li>
+                    <li>
+                        <h5><a href="">Photos</a></h5>
+                    </li>
+                    <li>
+                        <h5><a href="/Parks">Parks Visited</a></h5>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <img src="/images/IMG_2004.JPG" alt="insert photo here" style="width:100%">
+    <div class="body">
+        <div class="row">
+            <div class="three columns" id="alpha">
+                <form action="">
+                    <label for="email">Enter Your Email:</label>
+                    <input type="text" id="email" name="email" placeholder="name@email.com">
+                    <button class="primary" type="submit">subscribe</button>
+                </form>
+            </div>
+            <div class="nine columns" id="beta">
+                @{
+                    foreach(var post in @ViewBag.AllPosts){
+                        <h4><a href="/Show/@post.BlogId">@post.Title</a></h4>
+                        <p>@post.Content</p>
+                        <div class="foot">
+                            <p>posted by <a href="#">Manolo</a> on @post.CreatedAt</p>
+                        </div>
+                        foreach(var comment in @post.Comments){
+                            <p>@comment.User.Name commented: "@comment.Text" @comment.TimeAgo(@comment.CreatedAt)</p>
+                        }
+                        
+                        <form action="AddComment" method="post">
+                            <div class="form-group row">
+                                <label for="comment" class="col-2 col-form-label">Comment:</label>
+                                <div class="col-10">
+                                    <input type="text" class"form-control" id="comment" name="Text">
+                                </div>
+                            </div>
+                            <input type="hidden" name="BlogId" value=@post.BlogId>
+                            <input type="hidden" name="UserId" value=@ViewBag.CurrUser.UserId>
+                            <div>
+                                <button type="submit" class="btn btn-info">Submit</button>
+                            </div>
+                        </form>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="contact">
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <ul>
+                    <li><a href="">manolo@doggiemail.com</a></li>
+                    <li><a href=""><img id="fb" src="/images/fb.png" alt="uh oh" style="width:35px"></a></li>
+                    <li><a href=""><img src="/images/li.png" alt="uh oh" style="width:25px"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

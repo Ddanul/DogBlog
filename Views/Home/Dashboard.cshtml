@@ -1,0 +1,70 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="header">
+    <div class="u-pull-right">
+        <p>Logged in as @ViewBag.CurrUser.Name</p>
+        <p> | </p>
+        <form action="/logout" method="post">
+            <button type="submit" class="link">Logout</button>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="title">
+        <div class="row">
+            <div class="four columns">
+                <h1>Manolo |</h1>
+            </div>
+            <div class="navbar" class="eight columns">
+                <ul>
+                    <li>
+                        <h5><span color="black">Home</span></h5>
+                    </li>
+                    <li>
+                        <h5><a href="/Blog", "Blog">Blog</a></h5>
+                    </li>
+                    <li>
+                        <h5><a href="">Photos</a></h5>
+                    </li>
+                    <li>
+                        <h5><a href="/Parks">Parks Visited</a></h5>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <img src="/images/IMG_5045.JPG" alt="insert photo here" style="width:100%">
+    <div class="body">
+        <div class="row">
+            <div class="one-third column">
+                <h4>About Me</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer urna arcu, tincidunt eu posuere a, sodales sit amet leo. Proin eu lobortis lacus, a interdum metus. Pellentesque lectus tellus, bibendum id nunc vitae, consequat viverra nibh. Etiam sed mi vulputate nisl faucibus sodales id ac massa. Quisque condimentum consectetur nunc et ultricies. Nunc at rutrum turpis, id dictum nisi.</p>
+            </div>
+            <div class="one-third column">
+                <h4>Interests</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer urna arcu, tincidunt eu posuere a, sodales sit amet leo. Proin eu lobortis lacus, a interdum metus. Pellentesque lectus tellus, bibendum id nunc vitae, consequat viverra nibh. Etiam sed mi vulputate nisl faucibus sodales id ac massa. Quisque condimentum consectetur nunc et ultricies. Nunc at rutrum turpis, id dictum nisi.</p>
+            </div>
+            <div class="one-third column">
+                <h4>Goals</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer urna arcu, tincidunt eu posuere a, sodales sit amet leo. Proin eu lobortis lacus, a interdum metus. Pellentesque lectus tellus, bibendum id nunc vitae, consequat viverra nibh. Etiam sed mi vulputate nisl faucibus sodales id ac massa. Quisque condimentum consectetur nunc et ultricies. Nunc at rutrum turpis, id dictum nisi.</p>
+            </div>
+        </div>
+    </div>
+    <div class="contact">
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <ul>
+                    <li><a href="">manolo@doggiemail.com</a></li>
+                    <li><a href=""><img id="fb" src="/images/fb.png" alt="uh oh" style="width:35px"></a></li>
+                    <li><a href=""><img src="/images/li.png" alt="uh oh" style="width:25px"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
